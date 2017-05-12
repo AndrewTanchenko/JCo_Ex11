@@ -1,0 +1,95 @@
+import java.lang.reflect.Field;
+
+public class Person {
+    private String f;
+    private String i;
+    private String o;
+    private String bday;
+    private String adress;
+    private String phone;
+
+    public Person(){
+        this.f="";
+        this.i="";
+        this.o="";
+        this.bday="";
+        this.adress="";
+        this.phone="";
+    }
+
+    public Person(String f,String i,String o, String bdate, String adr,String phone){
+       this.f=f;
+       this.i=i;
+       this.o=o;
+       this.bday=bdate;
+       this.adress=adr;
+       this.phone=phone;
+    }
+
+    public static Person mkPerson(String f,String i,String o, String bday, String adr,String phone){
+        //if ...
+        return new Person(f, i, o, bday, adr, phone);
+    }
+
+    public String getFirstName(){
+        return this.i;
+    }
+    public String getLastName(){
+        return this.f;
+    }
+    public String getFatherName(){
+        return this.o;
+    }
+    public String getFullName(){
+        return this.f+" "+this.i+" "+this.o;
+    }
+    public String getBday(){
+        return this.bday;
+    }
+    public String getAdress(){
+        return this.adress;
+    }
+    public String getPhone(){
+        return this.phone;
+    }
+
+    public void setFirstName(String i){
+        this.i=i;
+    }
+    public void setLastName(String f){
+        this.f=f;
+    }
+    public void setFatherName(String o){
+        this.o=o;
+    }
+    public String toString(){
+        return "\n******************************"+
+                "\nPersonal data: "+
+                "\nFIO: "+this.f+" "+this.i+" "+this.o+
+                "\nBDay: "+this.bday+
+                "\nAdress:"+this.adress+"\nPhone:"+this.phone+
+                "\n******************************\n";
+    }
+
+    //*************************************//
+
+    public static void main(String[] args) {
+        Person person1;
+
+        person1 = mkPerson("a","a","a","a","a","a");
+        System.out.println(person1);
+
+        person1.setFirstName("Ivan");
+        person1.setLastName("Ivanov");
+        person1.setFatherName("Ivanovich");
+
+        System.out.println(person1);
+
+        //System.out.println(person1.getClass().getFields());
+        //System.out.println(person1.getClass().getDeclaredFields());
+        //System.out.println(person1.getClass().getTypeParameters());
+
+        //Field[] x = person1.getClass().getFields();
+        //System.out.println(x[0]);
+    }
+}
