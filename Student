@@ -1,0 +1,84 @@
+
+public class Student extends Person {
+    //private String f;
+    //private String i;
+    //private String o;
+    //private String bday;
+    //private String adress;
+    //private String phone;
+
+    private int id;
+    private String faculty;
+    private String kurs;
+    private String group ;
+
+    public Student() {
+    }
+
+    public Student(int id, String f,String i,String o,String bday,String adress, String phone, String faculty, String kurs, String group) {
+        super(f, i, o, bday, adress, phone);
+        //super.setLastName(f);
+        //super.setFirstName(i);
+        //super.setFatherName(o);
+        this.id=id;
+        this.faculty=faculty;
+        this.kurs=kurs;
+        this.group=group;
+    }
+
+    public String getID() {
+        return ""+this.id;
+    }
+    public String getFaculty() {
+        return this.faculty;
+    }
+    public String getKurs() {
+        return ""+this.kurs;
+    }
+    public String getGroup() {
+        return this.group;
+    }
+
+    public void setID(int id){
+        this.id=id;
+    }
+    public void setFaculty(String faculty){
+        this.faculty=faculty;
+    }
+    public void setKurs(String kurs){
+        this.kurs=kurs;
+    }
+    public void setGroup(String group){
+        this.group=group;
+    }
+
+    public String toString(){
+        return "\n******************************"+
+                "\nStudent data: "+
+                "\nPersonal student ID: "+getID()+
+                "\nFIO: "+super.getFullName()+
+                "\nBDay: "+super.getBday()+
+                "\nAdress:"+super.getAdress()+
+                "\nPhone:"+super.getPhone()+
+                "\nFaculty:"+this.faculty+
+                "\nKurs:"+this.kurs+
+                "\nGroup:"+this.group+
+                "\n******************************\n";
+    }
+
+//*************************************//
+
+    public static void main(String[] args) {
+        Student student1 = new Student();
+        //Student student2 = new Student("Ivanov", "Ivan", "Ivanovich","10Feb2000");
+        System.out.println(student1);
+
+        student1.setFirstName("Ivan");
+        student1.setLastName("Ivanov");
+        student1.setFatherName("Ivanovich");
+
+        System.out.println(student1);
+    }
+
+}
+
