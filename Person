@@ -1,34 +1,39 @@
-import java.lang.reflect.Field;
+//import java.lang.reflect.Field;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.text.SimpleDateFormat;
+import java.io.*;
+import java.util.StringTokenizer;
+
 
 public class Person {
     private String f;
     private String i;
     private String o;
-    private String bday;
+    private String bday; // DD,MM,YYYY
+
+    private static Calendar bday_;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
+
     private String adress;
     private String phone;
 
-    public Person(){
-        this.f="";
-        this.i="";
-        this.o="";
-        this.bday="";
-        this.adress="";
-        this.phone="";
-    }
+    public Person(){}
 
-    public Person(String f,String i,String o, String bdate, String adr,String phone){
+    public Person(String f,String i,String o, String bday, String adr,String phone){
        this.f=f;
        this.i=i;
        this.o=o;
-       this.bday=bdate;
+       setBday(bday);
        this.adress=adr;
        this.phone=phone;
     }
 
     public static Person mkPerson(String f,String i,String o, String bday, String adr,String phone){
-        //if ...
-        return new Person(f, i, o, bday, adr, phone);
+        //if all Ok
+       if(setBday(bday))
+           return new Person(f, i, o, bday, adr, phone);
+       return null;
     }
 
     public String getFirstName(){
@@ -44,7 +49,8 @@ public class Person {
         return this.f+" "+this.i+" "+this.o;
     }
     public String getBday(){
-        return this.bday;
+        //return this.bday_.get(Calendar.DAY_OF_MONTH)+" "+this.bday_.get(Calendar.MONTH)+" "+this.bday_.get(Calendar.YEAR);
+        return sdf.format(this.bday_.getTime());
     }
     public String getAdress(){
         return this.adress;
@@ -62,11 +68,27 @@ public class Person {
     public void setFatherName(String o){
         this.o=o;
     }
+    public static boolean setBday(String day){
+        try {
+            StringTokenizer st = new StringTokenizer(day, " .,:; -\' \"/");
+            int[] date = new int[3];
+            for(int j=0;j<3;j++) date[j]=Integer.parseInt(st.nextToken());
+
+            bday_=new GregorianCalendar(date[2],date[1]-1, date[0]);
+            return true;
+
+        } catch (NumberFormatException e) {
+            System.out.println("Wrong BDay format data");
+            System.out.println(e);
+            return false;
+        }
+    }
+
     public String toString(){
         return "\n******************************"+
                 "\nPersonal data: "+
                 "\nFIO: "+this.f+" "+this.i+" "+this.o+
-                "\nBDay: "+this.bday+
+                "\nBDay: "+getBday()+
                 "\nAdress:"+this.adress+"\nPhone:"+this.phone+
                 "\n******************************\n";
     }
@@ -76,7 +98,7 @@ public class Person {
     public static void main(String[] args) {
         Person person1;
 
-        person1 = mkPerson("a","a","a","a","a","a");
+        person1 = mkPerson("a","a","a","10,10,2010","a","a");
         System.out.println(person1);
 
         person1.setFirstName("Ivan");
@@ -87,9 +109,11 @@ public class Person {
 
         //System.out.println(person1.getClass().getFields());
         //System.out.println(person1.getClass().getDeclaredFields());
-        //System.out.println(person1.getClass().getTypeParameters());
 
-        //Field[] x = person1.getClass().getFields();
-        //System.out.println(x[0]);
+        System.out.println(person1.getBday());
+
+
+
+
     }
 }
