@@ -1,4 +1,5 @@
 import java.lang.reflect.Field;
+//import java.util.Comparator;
 
 public class Students {
 
@@ -6,12 +7,14 @@ public class Students {
         return st instanceof Student;
     }
 
+    public static boolean equals(String str1, String str2) {
+        return str1 == null ? str2 == null : str1.equals(str2);
+    }
+
     public static void printStudents (Student[] std){
         if(std!=null){
             System.out.println(std+" contained next students:");
-            for (Student student: std){
-                System.out.println(student.getFullName());
-            }
+            for (Student student: std) System.out.println(student.getFullName()+" / Kurs: "+student.getKurs()+" Gr: "+student.getGroup());
         }
         if(std==null) {
             System.out.println("No data for printing");
@@ -23,7 +26,7 @@ public class Students {
         Student[] res = new Student[std.length];
         int i=0;
         for (Student student: std){
-            if(student.getGroup()==gr){
+            if(equals(student.getGroup(),gr)){
                 res[i]=student; i+=1;
             }
         }
@@ -31,11 +34,11 @@ public class Students {
         return null;
     }
 
-    public static Student[] filterByFaculty (Student[] std, String gr){
+    public static Student[] filterByFaculty (Student[] std, String fac){
         Student[] res = new Student[std.length];
         int i=0;
         for (Student student: std){
-            if(student.getFaculty()==gr){
+            if(equals(student.getFaculty(),fac)){
                 res[i]=student; i+=1;
             }
         }
@@ -43,11 +46,11 @@ public class Students {
         return null;
     }
 
-    public static Student[] filterByKurs (Student[] std, String gr){
+    public static Student[] filterByKurs (Student[] std, String kr){
         Student[] res = new Student[std.length];
         int i=0;
         for (Student student: std){
-            if(student.getKurs()==gr){
+            if(equals(student.getKurs(),kr)){
                 res[i]=student; i+=1;
             }
         }
@@ -77,20 +80,21 @@ public class Students {
 
         Student[] gr = {student1,student2,student3,student4};
         printStudents(gr);
-        System.out.println(gr[1]);
+        //System.out.println(gr[1]);
 
         //Student[] group1;
-        //group1=filterByGroup(group,"I10A");
-        printStudents(filterByGroup(gr,"I10A"));
-        printStudents(filterByGroup(gr,"I10B"));
-        printStudents(filterByGroup(gr,"I"));
+        //group1=filterByGroup(gr,"I10A");
+        //printStudents(filterByGroup(gr,"I10A"));
+        //printStudents(filterByGroup(gr,"I10B"));
+        //printStudents(filterByGroup(gr,"I"));
 
-        printStudents(filterByFaculty(gr,"I"));
+        //printStudents(filterByFaculty(gr,"I"));
 
         printStudents(filterByKurs(gr,"1"));
         printStudents(filterByKurs(gr,"2"));
 
-
+        System.out.println(student3.getKurs());
+        System.out.println(equals(student3.getKurs(),"2"));
 
 
 
